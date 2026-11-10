@@ -1,0 +1,19 @@
+# Python 3.11. Versions were not pinned in the runs; record them with `pip freeze` in the environment used.
+# Download environment (01_download, 03_extension_1985_2025 download wrappers)
+numpy
+pandas
+scipy
+rasterio
+pyproj
+shapely
+geopandas
+requests
+pystac-client
+planetary-computer
+# Analysis environment (02_analysis_2013_2025, ana_p2long, 04_synthesis_and_figures)
+scikit-learn
+lightgbm
+statsmodels
+pyarrow
+matplotlib
+Pillow

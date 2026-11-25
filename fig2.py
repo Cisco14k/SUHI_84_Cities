@@ -1,10 +1,10 @@
 """Fig. 2: magnitude, frequency and reach of surface cooling (from the published scene-pooled estimates)."""
 import sys, numpy as np, pandas as pd
-sys.path.insert(0, "/home/claude/n84/src")
+sys.path.insert(0, "/home/claude/n84ns/src")
 from style import *
 from sitab import table3, t, num, rng
 import matplotlib.pyplot as plt
-T = table3(); C = pd.read_csv("/home/claude/n84/data/cities.csv")
+T = table3(); C = pd.read_csv("/home/claude/n84ns/data/cities.csv")
 fig = plt.figure(figsize=(W2, 112 * MM))
 gs = fig.add_gridspec(2, 3, left=0.075, right=0.985, top=0.95, bottom=0.085, wspace=0.42, hspace=0.55)
 # a: profiles
@@ -51,7 +51,7 @@ ax.axhline(450, color=NPG["red"], ls="--", lw=0.7); ax.axhline(300, color=NPG["g
 ax.text(0.104, 456, "InVEST default (450 m)", ha="right", va="bottom", fontsize=6, color=NPG["red"])
 ax.text(0.104, 306, "3-30-300 access (300 m)", ha="right", va="bottom", fontsize=6, color=NPG["grey"])
 ax.set_xlim(0.015, 0.108); ax.set_ylim(150, 500); ax.set_xticks([0.025, 0.05, 0.1])
-ax.set_xlabel("Threshold δ (°C per 10 pp)"); ax.set_ylabel("Practical reach of pooled profile (m)")
+ax.set_xlabel("Threshold δ (°C per 10 pp)"); ax.set_ylabel("Threshold reach of pooled profile (m)")
 ax.legend(loc="lower left"); label(ax, "d")
 # e: city reaches by zone
 ax = fig.add_subplot(gs[1, 1])
@@ -66,7 +66,7 @@ for i, z in enumerate(["Tropical", "Arid", "Temperate", "Continental"]):
     ax.scatter(i + rs.uniform(-0.2, 0.2, len(v)), v, s=4, color=ZONE[z], alpha=0.85, lw=0)
 ax.axhline(450, color=NPG["red"], ls="--", lw=0.7); ax.axhline(300, color=NPG["grey"], ls=":", lw=0.8)
 ax.set_xticks(range(4)); ax.set_xticklabels([f"{z if len(z) < 5 else z[:4] + '.'}\n({(C.zone == z).sum()})" for z in ["Tropical", "Arid", "Temperate", "Continental"]], fontsize=6)
-ax.set_xlim(-0.6, 3.6); ax.set_ylim(-20, 760); ax.set_ylabel("Practical reach of city-regions (m)"); label(ax, "e")
+ax.set_xlim(-0.6, 3.6); ax.set_ylim(-20, 760); ax.set_ylabel("Threshold reach of city-regions (m)"); label(ax, "e")
 # f: per hectare
 ax = fig.add_subplot(gs[1, 2])
 for s, mk in (("Water", "D"), ("Tree canopy", "o"), ("Open green", "s")):

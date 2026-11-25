@@ -1,6 +1,6 @@
 """Fig. 4: four decades, shade and weather (from the published estimates)."""
 import sys, re, numpy as np, pandas as pd
-sys.path.insert(0, "/home/claude/n84/src")
+sys.path.insert(0, "/home/claude/n84ns/src")
 from style import *
 from sitab import t, ci, num
 import matplotlib.pyplot as plt
@@ -27,7 +27,7 @@ R = t(10); ld = R[R.Analysis.str.startswith("Long differences")]
 ax.scatter([1.5, 2.5], ld["Practical reach, pooled (m)"].astype(float), marker="D", color=NPG["red"], s=14, zorder=3, label="long differences")
 ax.axhline(300, color=NPG["grey"], ls=":", lw=0.8); ax.axhline(450, color=NPG["red"], ls="--", lw=0.7)
 ax.set_xticks(x); ax.set_xticklabels(["1985–94", "1995–04", "2005–14", "2015–25"], fontsize=6)
-ax.set_ylim(140, 470); ax.set_ylabel("Practical reach (m)"); ax.legend(loc="lower center", fontsize=5.6, ncol=1)
+ax.set_ylim(140, 470); ax.set_ylabel("Threshold reach (m)"); ax.legend(loc="lower center", fontsize=5.6, ncol=1)
 ax.text(3.3, 455, "δ = 0.025", fontsize=5.4, color=NPG["red"], ha="right", va="bottom"); ax.text(3.3, 305, "δ = 0.05", fontsize=5.4, color=NPG["grey"], ha="right", va="bottom"); label(ax, "b")
 # c sun quadrants
 T = t(15)
@@ -55,4 +55,4 @@ ax.axvline(0, color="k", lw=0.5); ax.set_yticks(y); ax.set_yticklabels(labs, fon
 ax.set_xlabel("Δ cooling within 240 m (°C per 10 pp per s.d.)")
 ax.set_title("† overpass hour, 2024–2025; others monthly, 1985–2021; filled P < 0.05", fontsize=5.8, color="#444444", pad=3)
 ax.set_xlim(-0.014, 0.014); label(ax, "e", x=-0.33)
-save(fig, "Fig4")
+save(fig, "EDFig9")

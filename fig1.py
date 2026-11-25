@@ -1,12 +1,12 @@
 """Fig. 1: study design."""
 import sys, numpy as np, pandas as pd
-sys.path.insert(0, "/home/claude/n84/src")
+sys.path.insert(0, "/home/claude/n84ns/src")
 from style import *
 import matplotlib.pyplot as plt
 import geopandas as gpd
 from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.patches import Circle, FancyBboxPatch, Rectangle
-C = pd.read_csv("/home/claude/n84/data/cities.csv")
+C = pd.read_csv("/home/claude/n84ns/data/cities.csv")
 zmap = lambda k: "Tropical" if k[0] == "A" else "Arid" if k[0] == "B" else "Temperate" if k[0] == "C" else "Continental"
 C["zone"] = C.koppen.map(zmap)
 land = gpd.read_file("/home/claude/new/data/ne/ne_110m_land.shp")
@@ -50,8 +50,6 @@ for _ in range(32):
 ax.add_patch(Rectangle((-30, -30), 60, 60, fc=NPG["red"], ec="k", lw=0.5))
 for r in (120, 240, 360, 480, 600):
     ax.text(r * 0.707 + 6, r * 0.707 + 6, f"{r}", fontsize=5.6, color="#333333")
-ax.annotate("", xy=(-600, -650), xytext=(-250, -650), arrowprops=dict(arrowstyle="-|>", color=NPG["navy"], lw=0.8))
-ax.text(-425, -735, "overpass wind", fontsize=5.6, ha="center", color=NPG["navy"])
 ax.set_xlim(-680, 680); ax.set_ylim(-1000, 680)
 ax.text(0, -820, "Receptor (red), ring shares of canopy, open green,\nwater and bare ground; built-up cover is the reference", ha="center", va="top", fontsize=5.8)
 ax.text(-0.05, 1.03, "c", transform=ax.transAxes, fontsize=8, fontweight="bold", va="top")
@@ -61,9 +59,9 @@ steps = [("Landsat LST and decadal land cover", "12,014 scenes, 84 city-regions,
          ("Scene-level double machine learning", "36 ring treatments; neighbourhood confounders", NPG["teal"]),
          ("Correlated-error pooling", "block bootstrap; random effects; frequency, reach", NPG["lav"]),
          ("Sensor-footprint model", "PSF, resampling, ring geometry; physical length L", NPG["red"]),
-         ("60 m kernel and fetch DML", "WorldCover exposures; ERA5 overpass wind", NPG["salmon"]),
-         ("Regional Lagrangian tracking", "ERA5 back-trajectories: moisture and heat sources", NPG["cyan"]),
-         ("Equity and projections to 2100", "income groups; NEX-GDDP-CMIP6, 10 models", NPG["brown"])]
+         ("60 m kernel DML", "WorldCover exposures; decay length L; ring widths", NPG["salmon"]),
+         ("Modelled residential surface cooling", "residents, heat indicators, planting designs", NPG["cyan"]),
+         ("Planning kernels and scenarios", "held-out forecasts; NEX-GDDP-CMIP6, 10 models", NPG["brown"])]
 for i, (h, s, c) in enumerate(steps):
     y = 0.92 - i * 0.14
     ax.add_patch(FancyBboxPatch((0.02, y - 0.055), 0.96, 0.11, boxstyle="round,pad=0.0,rounding_size=0.02", fc="#F7F7F7", ec="#CCCCCC", lw=0.5))
